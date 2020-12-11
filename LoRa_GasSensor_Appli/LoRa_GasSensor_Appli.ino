@@ -2,6 +2,7 @@
 #include <rn2xx3.h>
 #include <string.h>
 #include "analogComp.h"
+#include <avr/sleep.h>
 
 #define LORA_TX         10
 #define LORA_RX         11
@@ -13,15 +14,14 @@
 
 #define LED_PIN         8
 
-#define GAS_SENSOR_PIN  A1 
-#define GAS_SENSOR_COMP_PIN AIN1
+#define GAS_SENSOR_PIN  A1 //to take readings with ADC
+#define GAS_SENSOR_COMP_PIN AIN1 //can only use AIN1 (D6) as analog comparator pin
 
 #define BAUD_RATE_DEBUG 57600
 #define BAUD_RATE_LORA  9600
 
 volatile int count = 0;
 volatile int alcohol_detected = 0;
-volatile int lora_sleep = 0;
 
 const char *devEUI = "EEEEEDB1212E24DE"; 
 const char *appEUI = "70B3D57ED0038A97"; 
@@ -127,6 +127,7 @@ float getVoltage(int pin){
   // to 0 to 5 volts (each 1 reading equals ~ 5 mV)
 }
 
+//when using temperature sensor (not use in this appli)
 int retrieve_temp_int(){
   float temperature = getVoltage(TEMP_PIN); //getting the voltage reading from the temperature sensor
   temperature = (temperature - 0.5) * 100; //converting from 10mV/°C with 500 mV
@@ -136,12 +137,13 @@ int retrieve_temp_int(){
   return temperature_int;
 }
 
-
+//ISR when alcohol is detected from gas sensor
 void exceed_thr (){
    analogComparator.disableInterrupt();
    alcohol_detected = 1;
 }
 
+//ISR when alcohol is no longer detected from gas sensor (not use in this application)
 void less_than_thr (){
    analogComparator.disableInterrupt();
    alcohol_detected = 0;
@@ -211,40 +213,49 @@ void setup() {
   
   analogComparator.setOn(REF_PIN, GAS_SENSOR_COMP_PIN);
   analogComparator.enableInterrupt(exceed_thr, RISING);
+
+  // Enable sleep mode to save energy(use idle sleep mode to keep the analog comparator and ADC on)
+  sleep_enable();
+  set_sleep_mode(SLEEP_MODE_IDLE);
 }
 
 
 
 void loop() {
-
+//  //For debugging purpose
 //  data_rx_test(&lora, &loraSerial);
-  
-  Serial.println("############loop############");
-  Serial.print("Alcohol detected : ");
-  if (alcohol_detected) {
+
+  while (alcohol_detected) {
+    //send bytes only when alcohol is detected
+    Serial.println("############Detection loop############");
     digitalWrite(LED_PIN, HIGH);
-    Serial.println("Detected!");
-    delay(1000) ; 
-    analogComparator.enableInterrupt(less_than_thr, FALLING);
-  }else{
-    digitalWrite(LED_PIN, LOW);
-    Serial.println("Not detected!");
-    delay(1000) ; 
-    analogComparator.enableInterrupt(exceed_thr, RISING);
+    Serial.println("Alcohol IS detected!");
+    
+    int gas_sensor_val = retrieve_gas_sensor_val();
+    byte* data_byte = int_to_byte(gas_sensor_val);
+    
+    tx_data(&lora, data_byte, 2);
+    free(data_byte);
+
+    //if gas sensor no longer detect alcohol stop sending bytes (gas_sensor_val < ref_val) [rmq: ref_val = ref_vol * (5.0/1024)]
+    if (gas_sensor_val< 254) {
+      digitalWrite(LED_PIN, LOW);
+      Serial.println("Alcohol NOT detected!");
+      alcohol_detected = 0; 
+      analogComparator.enableInterrupt(exceed_thr, RISING);
+    }
   }
+
+//  //For debugging purpose :
 //  Serial.print("Count : ");
 //  Serial.println(count);
   
-
+//  //when using temperature sensor:
 //  tansmit only 1 byte for temperature o save energy since tempearture in degree celcius does not exceed 255(0xFF)
 //  byte* data_byte = int_to_byte(retrieve_temp_int()); 
 //  tx_data(&lora, data_byte, 1);
  
-  byte* data_byte = int_to_byte(retrieve_gas_sensor_val());
-  tx_data(&lora, data_byte, 2);
-  
-  free(data_byte);  
-  delay(1000); //waiting a second  
+  sleep_cpu(); // put cpu to sleep when no more alcohol is detected
   
 
 }
