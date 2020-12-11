@@ -11,15 +11,17 @@
 #define REF_PIN         AIN0  // Connect the reference pin to digital input pin 6 for analog interrupt reference 
 #define TEST_REF_PIN   A5 // To see reference voltage value, remember to connect the cable to pin A5
 
-#define LED_PIN         7
+#define LED_PIN         8
 
 #define GAS_SENSOR_PIN  A1 
+#define GAS_SENSOR_COMP_PIN AIN1
 
 #define BAUD_RATE_DEBUG 57600
 #define BAUD_RATE_LORA  9600
 
 volatile int count = 0;
-
+volatile int alcohol_detected = 0;
+volatile int lora_sleep = 0;
 
 const char *devEUI = "EEEEEDB1212E24DE"; 
 const char *appEUI = "70B3D57ED0038A97"; 
@@ -136,9 +138,13 @@ int retrieve_temp_int(){
 
 
 void exceed_thr (){
-   digitalWrite(LED_PIN, HIGH);
-   count++;
-   
+   analogComparator.disableInterrupt();
+   alcohol_detected = 1;
+}
+
+void less_than_thr (){
+   analogComparator.disableInterrupt();
+   alcohol_detected = 0;
 }
 
 void analogReadnPrintVolt_REF_TEST (){
@@ -203,8 +209,8 @@ void setup() {
   
   pinMode(LED_PIN, OUTPUT);
   
-//  analogComparator.setOn(REF_PIN, GAS_SENSOR_PIN);
-//  analogComparator.enableInterrupt(exceed_thr, CHANGE);
+  analogComparator.setOn(REF_PIN, GAS_SENSOR_COMP_PIN);
+  analogComparator.enableInterrupt(exceed_thr, RISING);
 }
 
 
@@ -214,9 +220,21 @@ void loop() {
 //  data_rx_test(&lora, &loraSerial);
   
   Serial.println("############loop############");
+  Serial.print("Alcohol detected : ");
+  if (alcohol_detected) {
+    digitalWrite(LED_PIN, HIGH);
+    Serial.println("Detected!");
+    delay(1000) ; 
+    analogComparator.enableInterrupt(less_than_thr, FALLING);
+  }else{
+    digitalWrite(LED_PIN, LOW);
+    Serial.println("Not detected!");
+    delay(1000) ; 
+    analogComparator.enableInterrupt(exceed_thr, RISING);
+  }
+//  Serial.print("Count : ");
+//  Serial.println(count);
   
-  Serial.println("Counter : ");
-  Serial.println(count);
 
 //  tansmit only 1 byte for temperature o save energy since tempearture in degree celcius does not exceed 255(0xFF)
 //  byte* data_byte = int_to_byte(retrieve_temp_int()); 
