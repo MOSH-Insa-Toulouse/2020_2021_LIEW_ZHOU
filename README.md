@@ -15,5 +15,5 @@
 - [x] Design of the electronic card
 - [x] Importing the netlist
 - [x] Component placement
-- [] Define the design constraints of the electronic board ([stackup](https://www.emsproto.com/fr/standard-multi-layer-pcb-stackup))
-- [] Route the tracks of the electronic board
+- [x] Define the design constraints of the electronic board ([stackup](https://www.emsproto.com/fr/standard-multi-layer-pcb-stackup))
+- [x] Route the tracks of the electronic board
