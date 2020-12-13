@@ -3,12 +3,16 @@
 ## Tasks to be done
 - [ ] Extend edge cut and filled zones so that they cover entire rn24835
 - [ ] Insert ltspice schematics into git
+- [ ] Create and insert datasheet into git
 - [ ] Write readme (describe Arduino work, describe KiCAD work & remember to include answers for the ltspice part)
 - [ ] Delete unnecessary tasks from this readme when everything is done
 - [ ] Done
 
 ## Arduino
 Describe Arduino application with LoRa TTN and alcohol gas sensor (MQ3). Remember to add image of node-red flow.
+
+## Datasheet
+Describe briefly datatsheet part and add related images. (maybe sensor pinout diagrams? ...)
 
 ## LTSpice
 ### Objective
