@@ -8,7 +8,7 @@
 - [ ] Done
 
 ## Arduino
-Describe Arduino application with alcohol gas sensor (MQ3).
+Describe Arduino application with LoRa TTN and alcohol gas sensor (MQ3). Remember to add image of node-red flow.
 
 ## LTSpice
 ### Objective
