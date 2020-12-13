@@ -8,12 +8,12 @@
 
 ## TODO design an electronic card with Kicad
 - [x] Creat Kicad porject(Gas_sensor_shield)
-- [] Design the circuit board
-- [] Verification of electrical tests **ERC**
-- [] Association of component footprints with their case
-- [] Netlist generation
-- [] Design of the electronic card
-- [] Importing the netlist
-- [] Component placement
+- [x] Design the circuit board
+- [x] Verification of electrical tests **ERC**
+- [x] Association of component footprints with their case
+- [x] Netlist generation
+- [x] Design of the electronic card
+- [x] Importing the netlist
+- [x] Component placement
 - [] Define the design constraints of the electronic board ([stackup](https://www.emsproto.com/fr/standard-multi-layer-pcb-stackup))
 - [] Route the tracks of the electronic board
