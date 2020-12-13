@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP GSensor
+D Trimmable resistor (preset resistor)
+K R res resistor variable potentiometer trimmer
+F ~
+$ENDCMP
+#
+#End Doc Library
