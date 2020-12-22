@@ -41,11 +41,12 @@ The objective of designing this amplifier stage is ...
 - [x] Route the tracks of the electronic board
 
 ### Schematic
-![image](https://github.com/MOSH-Insa-Toulouse/2020_2021_LIEW_ZHOU/blob/main/Images/Kicad/3D_Model.PNG)
+![image](https://github.com/MOSH-Insa-Toulouse/2020_2021_LIEW_ZHOU/blob/main/Images/Kicad/Schematic.PNG)
 ### Placement and Routing
-pcb image here...
+![image](https://github.com/MOSH-Insa-Toulouse/2020_2021_LIEW_ZHOU/blob/main/Images/Kicad/Placement.PNG)
+![image](https://github.com/MOSH-Insa-Toulouse/2020_2021_LIEW_ZHOU/blob/main/Images/Kicad/Routing.PNG)
 ### 3D View
-3D view of pcb image here...
+![image](https://github.com/MOSH-Insa-Toulouse/2020_2021_LIEW_ZHOU/blob/main/Images/Kicad/3D_Model.PNG)
 
 
 
