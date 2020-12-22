@@ -273,7 +273,7 @@
   (module My_Package:RN2483_breakout (layer F.Cu) (tedit 5FD6547B) (tstamp 5FD6B344)
     (at 114.808 108.585 90)
     (path /5FDA7E6B)
-    (fp_text reference U3 (at -6.35 5.08 90) (layer F.SilkS)
+    (fp_text reference U3 (at -7.62 7.62 90) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (fp_text value RN2483_Breakout (at 10.795 3.175 90) (layer F.Fab)
