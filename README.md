@@ -1,14 +1,6 @@
 # TP MOSH Gas Sensor Application using LoRa Communication
 This project is done in conjunction with the Smart Devices module. The objective of this project is to develop an application that acts as a breathalyser, detecting alcohol and send a warning to, for example, a web application. The communication from the sensor node to that web application was done through The Things Network platform via LoRa. We created a graphical interface at Node-RED to visualise the gas sensor value.
 
-## Tasks to be done
-- [x] Extend edge cut and filled zones so that they cover entire rn24835
-- [ ] Insert ltspice schematics into git
-- [x] Create and insert datasheet into git
-- [x] Write readme (describe Arduino work, describe KiCAD work & remember to include answers for the ltspice part)
-- [x] Delete unnecessary tasks from this readme when everything is done
-- [ ] Done
-
 ## Arduino
 For the prototyping on Arduino, we did not use the gas sensor fabricated at the cleanroom but a similar one namely, MQ3. For energy efficiency purpose, we put the mcu to sleep when no alcohol is detected, and only wake up and transmit using LoRa when alcohol is detected (gas sensor value exceeds a certain seuil).
 
@@ -57,37 +49,9 @@ Click [here](https://github.com/MOSH-Insa-Toulouse/2020_2021_LIEW_ZHOU/blob/main
 
 ## LTSpice
 ### Objective
-The objective of designing this amplifier stage is ...
+This gas sensor gives an output of around 100 nA. This is not acceptable for normal microcontrollers used nowadays. Therefore, to obtain the output of the gas sensor, the following circuit is needed as an intermediate between the gas sensor and the ADC of  a microcontroller. This circuit will give a gain of 100 in nominal condition.
 
-### Q&A
-1. __Question : L'incidence de l'offset de l'amplificateur LTC1050C est-elle acceptable ?
-
-   Answer : sdsaad 
-
-2. __Question : L'incidence du courant d'entrée de l'amplificateur est-elle acceptable ?
-
-   Answer : dsafssds
-   
-3. __Question : Quelle est la fréquence de coupure de chaque étage de filtre passe-bas ?
-
-   Answer : dsafssds
-   
-4. __Question : Quelle est l'atténuation globale d'un bruit en courant de 50 Hz ?
-
-   Answer : dsafssds
-   
-5. __Question : Quelle est l'atténuation globale d'un bruit en courant à la fréquence limite de repliement (dans le cas de l'ADC Arduino Uno) ?
-
-   Answer : dsafssds
-   
-6. __Question : Préparez une simulation de démonstration
-
-   Answer : dsafssds
-
-7. __Question : Donner une expression analytique de la résistance du capteur en fonction des éléments du circuit transimpédance.
-
-   Answer : dsafssds
-
+![image](https://github.com/MOSH-Insa-Toulouse/2020_2021_LIEW_ZHOU/blob/main/Images/Kicad/Schema.PNG)
 
 ## Contribution
 ### Students 
