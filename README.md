@@ -42,24 +42,31 @@ The objective of designing this amplifier stage is ...
 
 ### Q&A
 1. __Question : L'incidence de l'offset de l'amplificateur LTC1050C est-elle acceptable ?
+
    Answer : sdsaad 
 
 2. __Question : L'incidence du courant d'entrée de l'amplificateur est-elle acceptable ?
+
    Answer : dsafssds
    
 3. __Question : Quelle est la fréquence de coupure de chaque étage de filtre passe-bas ?
+
    Answer : dsafssds
    
 4. __Question : Quelle est l'atténuation globale d'un bruit en courant de 50 Hz ?
+
    Answer : dsafssds
    
 5. __Question : Quelle est l'atténuation globale d'un bruit en courant à la fréquence limite de repliement (dans le cas de l'ADC Arduino Uno) ?
+
    Answer : dsafssds
    
 6. __Question : Préparez une simulation de démonstration
+
    Answer : dsafssds
 
 7. __Question : Donner une expression analytique de la résistance du capteur en fonction des éléments du circuit transimpédance.
+
    Answer : dsafssds
 
 
