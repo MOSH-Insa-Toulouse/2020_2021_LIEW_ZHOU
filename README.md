@@ -2,12 +2,12 @@
 This project is done in conjunction with the Smart Devices module. The objective of this project is to develop an application that acts as a breathalyser, detecting alcohol and send a warning to, for example, a web application. The communication from the sensor node to that web application was done through The Things Network platform via LoRa. We created a graphical interface at Node-RED to visualise the gas sensor value.
 
 ## Arduino
-For the prototyping on Arduino, we did not use the gas sensor fabricated at the cleanroom but a similar one namely, MQ3. For energy efficiency purpose, we put the mcu to sleep when no alcohol is detected, and only wake up and transmit using LoRa when alcohol is detected (gas sensor value exceeds a certain seuil).
+For the prototyping on Arduino, we did not use the gas sensor fabricated at the cleanroom but a similar one, namely, MQ3. For energy efficiency purpose, we put the mcu to sleep when no alcohol is detected, and only wake up and transmit using LoRa when alcohol is detected (gas sensor value exceeds a certain threshold).
 
 ### Materials
 
 Following is a list of the components used:
-* Arduino Uno
+* Arduino Uno x 1 
 * RN2483A LoRa module x 1
 * LED x 1
 * Gas sensor MQ3 x 1
